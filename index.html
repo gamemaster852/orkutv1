@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Gabungan Payment Gateway V1</title>
+    <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background: radial-gradient(circle at top, #0f0c29, #302b63, #24243e);
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(0,0,0,0.2);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #0ff;
+  border: 1px solid #0ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  background: #111;
+  color: #0ff;
+  border: 1px solid #0ff;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+button {
+  background: #0ff;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  margin: 10px 0;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+button:hover {
+  background: #00faff;
+  box-shadow: 0 0 10px #00faff;
+}
+
+img {
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 12px;
+  border: 2px solid #0ff;
+}
+
+.hidden {
+  display: none;
+}
+
+#paymentInfo,
+#suksesInfo {
+  margin-top: 10px;
+  line-height: 1.6;
+}
+    </style>
+</head>
+<body>
+
+<!-- index.html -->
+<section id="original-index">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QRIS Gateway - Beranda</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-Ku8T6iJG6VkpMI+zwb6+kEkhTc7HTO3aOrTzvHfWzP7fKb9LhM6k+2BTVAYkC9M9ZIGLQ0LTvVR1KRxP3tG5IA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: radial-gradient(circle at top, #0f0c29, #302b63, #24243e);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 90%;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px #0ff;
+      border: 1px solid #0ff;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      border: 2px solid #0ff;
+      box-shadow: 0 0 15px #0ff;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 10px 0 20px;
+      color: #0ff;
+    }
+
+    .developer-name {
+      font-size: 1rem;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    .payment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .payment-list a {
+      text-decoration: none;
+      background: linear-gradient(90deg, #00fff7, #00bfff);
+      color: #000;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00f2ff;
+      transition: 0.3s;
+    }
+
+    .payment-list a:hover {
+      background: #0ff;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="-media-/logo.png" alt="Logo" class="logo" />
+    <h1>🌌 QRIS Gateway 🌸</h1>
+    <div class="developer-name">by Max Dev</div>
+
+    <p>Pilih metode pembayaran di bawah ini:</p>
+
+    <div class="payment-list">
+      <a href="/QRIS-AJAIB">💠 Pembayaran QRIS Ajaib (Otomatis)</a>
+      <a href="/DANA">💸 Pembayaran Dana</a>
+    </div>
+  </div>
+</body>
+</html>
+</section>
+
+<!-- DANA/index.html -->
+<section id="dana-html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pembayaran Dana</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      color: white;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 2rem;
+      border: 1px solid #0ff;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #0ff;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+    img {
+      width: 250px;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0ff;
+    }
+    .status {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #0ff;
+    }
+    .nomor {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Scan Dana untuk Membayar</h2>
+    <img src="../-media-/dana.png" alt="Dana QR" />
+    <p class="nomor">Nomor Dana: 085220212533</p>
+    <p class="status">Menunggu pembayaran...</p>
+  </div>
+</body>
+</html>
+</section>
+
+<!-- QRIS/index.html -->
+<section id="qris-html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pembayaran QRIS</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+      color: white;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 2rem;
+      border: 1px solid #0ff;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #0ff;
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+    img {
+      width: 250px;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0ff;
+    }
+    .status {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Scan QRIS untuk Membayar</h2>
+    <img src="../-media-/qris.png" alt="QRIS Image" />
+    <p class="status">SILAHKAN SCAN QR DI ATAS</p>
+  </div>
+</body>
+</html>
+</section>
+
+<!-- QRIS-AJAIB/index.html -->
+<section id="qris-ajaib-html">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QRIS Gateway Neon</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>💫 QRIS Payment Gateway</h1>
+
+    <!-- Input Area -->
+    <div id="inputArea">
+      <input type="number" id="jumlah" placeholder="Masukkan jumlah (Rp)">
+      <button onclick="buatPembayaran()">🚀 Buat Pembayaran</button>
+    </div>
+
+    <!-- QRIS Area -->
+    <div id="qrisArea" class="hidden">
+      <img id="qrisImage" alt="QRIS" />
+      <div id="paymentInfo"></div>
+    </div>
+
+    <!-- Batalkan -->
+    <button id="batalBtn" class="hidden" onclick="batalkanPembayaran()">❌ Batalkan</button>
+
+    <!-- Sukses -->
+    <div id="suksesArea" class="hidden">
+      <h2>✅ Transaksi Sukses</h2>
+      <p id="suksesInfo"></p>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+</section>
+
+<!-- Scripts -->
+<script>
+import SETTINGS from '../settings.js';
+
+let user = {
+  saldo: 0,
+  status: false,
+  amount: 0,
+  transactionId: null,
+  interval: null
+};
+
+window.buatPembayaran = async function () {
+  const jumlahDeposit = parseInt(document.getElementById("jumlah").value);
+  if (!jumlahDeposit || jumlahDeposit <= 0) return alert("Masukkan jumlah yang valid!");
+
+  const { apikey, qrisCode } = SETTINGS.QRIS;
+  const res = await fetch(`https://www.wannhosting.web.id/api/orkut/createpayment?apikey=${apikey}&amount=${jumlahDeposit}&codeqr=${qrisCode}`);
+  const json = await res.json();
+
+  if (!json?.result) return alert("❌ Gagal membuat QRIS.");
+
+  const data = json.result;
+  user.status = true;
+  user.amount = jumlahDeposit;
+  user.transactionId = data.transactionId;
+
+  document.getElementById("inputArea").classList.add("hidden");
+  document.getElementById("qrisArea").classList.remove("hidden");
+  document.getElementById("batalBtn").classList.remove("hidden");
+  document.getElementById("suksesArea").classList.add("hidden");
+
+  document.getElementById("qrisImage").src = data.qrImageUrl;
+  document.getElementById("paymentInfo").innerHTML = `
+    💰 Jumlah: Rp ${jumlahDeposit.toLocaleString()}<br>
+    🆔 Transaksi: ${data.transactionId}<br>
+    ⏰ Expired: 5 menit
+  `;
+
+  if (user.interval) clearInterval(user.interval);
+  user.interval = setInterval(cekStatusPembayaran, SETTINGS.CHECK_INTERVAL_MS);
+};
+
+window.batalkanPembayaran = function () {
+  if (!user.status) return alert("Tidak ada transaksi aktif.");
+  user.status = false;
+  clearInterval(user.interval);
+  user.transactionId = null;
+  user.amount = 0;
+
+  document.getElementById("qrisArea").classList.add("hidden");
+  document.getElementById("batalBtn").classList.add("hidden");
+  document.getElementById("suksesArea").classList.add("hidden");
+  document.getElementById("inputArea").classList.remove("hidden");
+};
+
+async function cekStatusPembayaran() {
+  if (!user.status) return clearInterval(user.interval);
+
+  const { apikey, merchantId, keyorkut } = SETTINGS.QRIS;
+
+  try {
+    const res = await fetch(`https://www.wannhosting.web.id/api/orkut/cekstatus?apikey=${apikey}&merchant=${merchantId}&keyorkut=${keyorkut}`);
+    const json = await res.json();
+
+    // Jika data transaksi array
+    if (!json?.data || !Array.isArray(json.data)) {
+      console.log("❌ Data transaksi tidak valid.");
+      return;
+    }
+
+    // Cari transaksi berdasarkan transactionId
+    const transaksi = json.data.find(item => item.transactionId === user.transactionId);
+
+    if (!transaksi) {
+      console.log("⌛ Transaksi belum ditemukan.");
+      return;
+    }
+
+    // Jika pembayaran berhasil
+    if (transaksi.status === "PAID" || transaksi.amount == user.amount) {
+      user.status = false;
+      clearInterval(user.interval);
+      user.saldo += user.amount;
+
+      const trxId = "FR3-" + Math.floor(Math.random() * 1000000).toString().padStart(6, "0");
+
+      document.getElementById("qrisArea").classList.add("hidden");
+      document.getElementById("batalBtn").classList.add("hidden");
+      document.getElementById("suksesArea").classList.remove("hidden");
+
+      document.getElementById("suksesInfo").innerHTML = `
+        <strong>Pembayaran Berhasil ✅</strong><br><br>
+        💰 Jumlah: Rp ${user.amount.toLocaleString()}<br>
+        🆔 ID Transaksi: ${trxId}<br>
+        📈 Saldo Baru: Rp ${user.saldo.toLocaleString()}
+      `;
+    } else {
+      console.log("⌛ Belum dibayar. Mengecek ulang...");
+    }
+
+  } catch (err) {
+    console.error("❌ Gagal cek status:", err);
+  }
+}
+</script>
+
+<script>
+const SETTINGS = {
+  QRIS: {
+    apikey: "wannhosting", // jangan di ganti
+    merchantId: "OK1411540",
+    keyorkut: "WFCKEY_2efbcc6f74f9627c2ffdcf9a80a0edbc9098e01e2cdfbf40d5514b98",
+    qrisCode: "00020101021126670016COM.NOBUBANK.WWW01189360050300000879140214737303604511730303UMI51440014ID.CO.QRIS.WWW0215ID20233008497000303UMI5204541153033605802ID5919TOKO LUXZ OK14115406009BENGKALIS61052871162070703A01630497DB"
+  },
+  CHECK_INTERVAL_MS: 15000
+};
+
+export default SETTINGS;
+</script>
+
+</body>
+</html>
